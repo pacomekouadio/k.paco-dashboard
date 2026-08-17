@@ -142,3 +142,34 @@
     color: var(--color-foreground);
   }
 }
+
+/* --- Ocean Crown site styles (imported from K.paco) --- */
+@layer base {
+  body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', 'Poppins', sans-serif;
+  }
+}
+
+.font-montserrat { font-family: 'Montserrat', sans-serif; }
+.font-poppins { font-family: 'Poppins', sans-serif; }
+.font-arabic { font-family: 'Cairo', 'Poppins', sans-serif; }
+
+.ocean-hero-gradient {
+  background: linear-gradient(180deg, rgba(8, 26, 54, 0.72) 0%, rgba(6, 20, 44, 0.85) 100%);
+}
+
+.dark-navy-section { background-color: #08172c; }
+
+.card-service-active {
+  background-color: #0077e6;
+  box-shadow: 0 16px 32px -8px rgba(0, 119, 230, 0.4);
+}
+
+.card-service-default {
+  background-color: #ffffff;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+}
