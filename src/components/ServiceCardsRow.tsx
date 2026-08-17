@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { Plane, Truck, Ship, Package, Anchor, ArrowRight } from 'lucide-react';
-import { topServiceCards } from '../data/content';
-import { ServiceCard } from '../types';
+import { useSiteContent } from '../content/SiteContentProvider';
+import type { ServiceItem } from '../content/schema';
 
 interface ServiceCardsRowProps {
   onSelectService: (serviceTitle: string) => void;
 }
 
 export const ServiceCardsRow: React.FC<ServiceCardsRowProps> = ({ onSelectService }) => {
+  const { services } = useSiteContent();
   const [activeId, setActiveId] = useState<string>('project-cargo');
 
-  const renderIcon = (iconName: ServiceCard['iconName'], isActive: boolean) => {
+  const renderIcon = (iconName: ServiceItem['iconName'], isActive: boolean) => {
     const iconClass = isActive
       ? 'text-white'
       : 'text-sky-500 group-hover:text-[#0077e6] transition-colors';
@@ -35,7 +36,7 @@ export const ServiceCardsRow: React.FC<ServiceCardsRowProps> = ({ onSelectServic
     <div id="services" className="relative z-20 max-w-[1240px] mx-auto px-4 sm:px-6 -mt-16 sm:-mt-20 lg:-mt-24">
       {/* 5 Cards Row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 items-stretch">
-        {topServiceCards.map((card) => {
+        {services.map((card) => {
           const isActive = activeId === card.id;
 
           return (

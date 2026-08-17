@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { whyChooseUsSteps } from '../data/content';
+import { useSiteContent } from '../content/SiteContentProvider';
 
 export const WhyChooseUs: React.FC = () => {
+  const { why } = useSiteContent();
+  const whyChooseUsSteps = why.steps;
   const [selectedStep, setSelectedStep] = useState<string>('excellence');
 
   return (
@@ -9,7 +11,7 @@ export const WhyChooseUs: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
         {/* Section Heading */}
         <h2 className="font-montserrat text-2xl sm:text-3xl lg:text-[32px] font-extrabold text-[#08182b] tracking-tight mb-10 sm:mb-12">
-          Why Choose Us?
+          {why.heading}
         </h2>
 
         {/* 3 Step Timeline Layout exactly matching the mockup */}

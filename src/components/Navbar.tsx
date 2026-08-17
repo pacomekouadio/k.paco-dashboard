@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Phone, Compass, Menu, X, ArrowUpRight } from 'lucide-react';
 import { OceanCrownLogo } from './OceanCrownLogo';
-import { navItems } from '../data/content';
+import { useSiteContent } from '../content/SiteContentProvider';
 
 interface NavbarProps {
   onOpenQuote: () => void;
@@ -12,6 +12,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuote, onOpenTracking }) =
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeNav, setActiveNav] = useState('home');
+  const { nav, brand } = useSiteContent();
+  const navItems = nav.items;
+  const telHref = `tel:${nav.phone.replace(/[^+0-9]/g, '')}`;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,7 +56,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuote, onOpenTracking }) =
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           >
-            <OceanCrownLogo variant="white" size="md" />
+            <OceanCrownLogo variant="white" size="md" name={brand.name} tagline={brand.tagline} />
           </a>
 
           {/* Desktop Navigation Links with Subtitles matching mockup */}
@@ -84,7 +87,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuote, onOpenTracking }) =
           <div className="hidden lg:flex items-center gap-6 text-white text-right">
             {/* 24x7 Helpline */}
             <a
-              href="tel:+97156152266"
+              href={telHref}
               className="flex items-center gap-2.5 text-left group hover:opacity-90 transition-opacity"
             >
               <div className="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center text-white group-hover:border-sky-400 group-hover:text-sky-400 transition-colors">
@@ -92,10 +95,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuote, onOpenTracking }) =
               </div>
               <div className="flex flex-col leading-none">
                 <span className="text-[12px] font-montserrat font-bold tracking-wider text-white">
-                  +971 561 52266
+                  {nav.phone}
                 </span>
                 <span className="text-[9.5px] text-white/50 tracking-tight font-poppins mt-0.5">
-                  24 X 7 Helpline
+                  {nav.phoneLabel}
                 </span>
               </div>
             </a>
@@ -110,7 +113,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuote, onOpenTracking }) =
               </div>
               <div className="flex flex-col leading-none">
                 <span className="text-[11.5px] font-montserrat font-bold tracking-wider text-white uppercase group-hover:text-sky-300 transition-colors">
-                  TRACK YOUR SHIPMENT
+                  {nav.trackLabel}
                 </span>
                 <span className="text-[9.5px] text-white/50 tracking-tight font-poppins mt-0.5">
                   Track your cargo
@@ -164,13 +167,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuote, onOpenTracking }) =
 
           <div className="pt-4 border-t border-white/10 flex flex-col gap-3">
             <a
-              href="tel:+97156152266"
+              href={telHref}
               className="flex items-center gap-3 p-3 rounded-xl bg-white/5 text-white text-sm font-semibold"
             >
               <Phone className="w-4 h-4 text-sky-400" />
               <div>
-                <div>+971 561 52266</div>
-                <div className="text-xs text-white/50 font-normal">24 X 7 Helpline</div>
+                <div>{nav.phone}</div>
+                <div className="text-xs text-white/50 font-normal">{nav.phoneLabel}</div>
               </div>
             </a>
             <button
