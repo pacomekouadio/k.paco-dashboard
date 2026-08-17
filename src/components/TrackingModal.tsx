@@ -19,7 +19,7 @@ export const TrackingModal: React.FC<TrackingModalProps> = ({ isOpen, onClose })
     e.preventDefault();
     const clean = query.trim().toUpperCase();
     if (sampleTrackingRecords[clean]) {
-      setResult(sampleTrackingRecords[clean]);
+      setResult(sampleTrackingRecords[clean] ?? null);
       setNotFound(false);
     } else {
       // Auto-generate realistic tracking if custom code entered
