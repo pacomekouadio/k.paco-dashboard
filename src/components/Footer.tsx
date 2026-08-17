@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ArrowRight, Check } from 'lucide-react';
 import { Twitter, Facebook, Youtube, Linkedin } from './SocialIcons';
 import { OceanCrownLogo } from './OceanCrownLogo';
+import { useSiteContent } from '../content/SiteContentProvider';
 
 interface FooterProps {
   onOpenQuote: () => void;
@@ -14,6 +15,7 @@ export const Footer: React.FC<FooterProps> = ({
   onOpenTracking,
   onSelectService,
 }) => {
+  const { footer, brand } = useSiteContent();
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
@@ -27,14 +29,7 @@ export const Footer: React.FC<FooterProps> = ({
     }
   };
 
-  const servicesLinks = [
-    'Project Cargo',
-    'Shipping Agency',
-    'Used Container',
-    'Air Freight',
-    'Land Freight',
-    'Sea Freight',
-  ];
+  const servicesLinks = footer.servicesLinks;
 
   const outlookLinks = [
     { label: 'Shipment Tracking', action: onOpenTracking },
@@ -51,16 +46,16 @@ export const Footer: React.FC<FooterProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 mb-12">
           {/* Column 1: Brand Logo & Description */}
           <div className="lg:col-span-4 space-y-4">
-            <OceanCrownLogo variant="white" size="md" />
+            <OceanCrownLogo variant="white" size="md" name={brand.name} tagline={brand.tagline} />
 
             <p className="text-[11.5px] leading-relaxed text-white/60 font-poppins pt-2 max-w-sm">
-              Provides air freight services to meet up with your transportation needs, professional services to deliver your air freight fast and safe to its final destination.
+              {footer.description}
             </p>
 
             {/* Social Icons matching mockup */}
             <div className="flex items-center gap-3 pt-2">
               <a
-                href="https://twitter.com"
+                href={footer.socials.twitter}
                 target="_blank"
                 rel="noreferrer"
                 className="w-7 h-7 rounded-full bg-white/10 hover:bg-[#0077e6] text-white flex items-center justify-center transition-colors text-xs"
@@ -69,7 +64,7 @@ export const Footer: React.FC<FooterProps> = ({
                 <Twitter className="w-3.5 h-3.5" />
               </a>
               <a
-                href="https://facebook.com"
+                href={footer.socials.facebook}
                 target="_blank"
                 rel="noreferrer"
                 className="w-7 h-7 rounded-full bg-white/10 hover:bg-[#0077e6] text-white flex items-center justify-center transition-colors text-xs"
@@ -78,7 +73,7 @@ export const Footer: React.FC<FooterProps> = ({
                 <Facebook className="w-3.5 h-3.5" />
               </a>
               <a
-                href="https://youtube.com"
+                href={footer.socials.youtube}
                 target="_blank"
                 rel="noreferrer"
                 className="w-7 h-7 rounded-full bg-white/10 hover:bg-[#0077e6] text-white flex items-center justify-center transition-colors text-xs"
@@ -87,7 +82,7 @@ export const Footer: React.FC<FooterProps> = ({
                 <Youtube className="w-3.5 h-3.5" />
               </a>
               <a
-                href="https://linkedin.com"
+                href={footer.socials.linkedin}
                 target="_blank"
                 rel="noreferrer"
                 className="w-7 h-7 rounded-full bg-white/10 hover:bg-[#0077e6] text-white flex items-center justify-center transition-colors text-xs"
@@ -101,7 +96,7 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Column 2: Services */}
           <div className="lg:col-span-2 space-y-3">
             <h4 className="font-montserrat text-xs font-bold text-white uppercase tracking-wider">
-              Services
+              {footer.servicesTitle}
             </h4>
             <ul className="space-y-2 text-[11.5px] text-white/60 font-poppins">
               {servicesLinks.map((item) => (
@@ -121,7 +116,7 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Column 3: Outlook */}
           <div className="lg:col-span-2 space-y-3">
             <h4 className="font-montserrat text-xs font-bold text-white uppercase tracking-wider">
-              Outlook
+              {footer.outlookTitle}
             </h4>
             <ul className="space-y-2 text-[11.5px] text-white/60 font-poppins">
               {outlookLinks.map((item) => (
@@ -151,10 +146,10 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Column 4: Subscribe Form */}
           <div className="lg:col-span-4 space-y-3">
             <h4 className="font-montserrat text-xs font-bold text-white uppercase tracking-wider">
-              Subscribe
+              {footer.subscribeTitle}
             </h4>
             <p className="text-[11.5px] text-white/60 font-poppins leading-relaxed">
-              Get to know about Ocean Crown, our updates and all news, straight to your inbox.
+              {footer.subscribeText}
             </p>
 
             <form onSubmit={handleSubscribe} className="pt-2">
@@ -187,14 +182,15 @@ export const Footer: React.FC<FooterProps> = ({
         {/* Bottom Copyright */}
         <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[10px] text-white/40 font-poppins">
           <div>
-            &copy; {new Date().getFullYear()} Ocean Crown Shipping Services L.L.C. All rights reserved.
+            &copy; {new Date().getFullYear()} {footer.copyright}
           </div>
           <div className="flex items-center gap-4">
-            <a href="#home" className="hover:text-white/70 transition-colors">Privacy Policy</a>
-            <span>•</span>
-            <a href="#home" className="hover:text-white/70 transition-colors">Terms of Carriage</a>
-            <span>•</span>
-            <a href="#home" className="hover:text-white/70 transition-colors">Port Tariff Rules</a>
+            {footer.legalLinks.map((link, i) => (
+              <React.Fragment key={link.label}>
+                {i > 0 && <span>•</span>}
+                <a href={link.href} className="hover:text-white/70 transition-colors">{link.label}</a>
+              </React.Fragment>
+            ))}
           </div>
         </div>
       </div>

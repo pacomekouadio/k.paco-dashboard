@@ -9,8 +9,17 @@ import { UnmatchedServicesSection } from './components/UnmatchedServicesSection'
 import { Footer } from './components/Footer';
 import { QuoteModal } from './components/QuoteModal';
 import { TrackingModal } from './components/TrackingModal';
+import { SiteContentProvider } from './content/SiteContentProvider';
 
 export default function App() {
+  return (
+    <SiteContentProvider>
+      <SiteInner />
+    </SiteContentProvider>
+  );
+}
+
+function SiteInner() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [isTrackingModalOpen, setIsTrackingModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState('PROJECT CARGO');
