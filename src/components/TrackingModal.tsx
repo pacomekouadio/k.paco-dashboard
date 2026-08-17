@@ -10,7 +10,7 @@ interface TrackingModalProps {
 
 export const TrackingModal: React.FC<TrackingModalProps> = ({ isOpen, onClose }) => {
   const [query, setQuery] = useState('OC-89472');
-  const [result, setResult] = useState<TrackingData | null>(sampleTrackingRecords['OC-89472']);
+  const [result, setResult] = useState<TrackingData | null>((sampleTrackingRecords['OC-89472'] ?? null));
   const [notFound, setNotFound] = useState(false);
 
   if (!isOpen) return null;
@@ -103,7 +103,7 @@ export const TrackingModal: React.FC<TrackingModalProps> = ({ isOpen, onClose })
               type="button"
               onClick={() => {
                 setQuery('OC-89472');
-                setResult(sampleTrackingRecords['OC-89472']);
+                setResult((sampleTrackingRecords['OC-89472'] ?? null));
                 setNotFound(false);
               }}
               className="px-2 py-0.5 bg-slate-100 hover:bg-sky-100 hover:text-sky-700 rounded text-slate-700 font-mono font-medium transition-colors"
@@ -114,7 +114,7 @@ export const TrackingModal: React.FC<TrackingModalProps> = ({ isOpen, onClose })
               type="button"
               onClick={() => {
                 setQuery('OC-55120');
-                setResult(sampleTrackingRecords['OC-55120']);
+                setResult((sampleTrackingRecords['OC-55120'] ?? null));
                 setNotFound(false);
               }}
               className="px-2 py-0.5 bg-slate-100 hover:bg-sky-100 hover:text-sky-700 rounded text-slate-700 font-mono font-medium transition-colors"

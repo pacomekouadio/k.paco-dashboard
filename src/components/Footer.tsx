@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ArrowRight, Twitter, Facebook, Youtube, Linkedin, Check } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
+import { Twitter, Facebook, Youtube, Linkedin } from './SocialIcons';
 import { OceanCrownLogo } from './OceanCrownLogo';
 
 interface FooterProps {
