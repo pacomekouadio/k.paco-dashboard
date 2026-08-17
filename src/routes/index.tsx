@@ -1,24 +1,23 @@
 import { createFileRoute } from "@tanstack/react-router";
+import SiteApp from "../SiteApp";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const title = "Ocean Crown Shipping Services L.L.C | International Freight Forwarding";
+const description =
+  "Ocean Crown Shipping Services LLC — International freight forwarding by sea, air and land. Dubai, Amman, Basra, Antwerp.";
+
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: "Ocean Crown Shipping Services L.L.C" },
+      {
+        property: "og:description",
+        content: "Ships Anything Around The World — International Freight & Logistics",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: SiteApp,
 });
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
