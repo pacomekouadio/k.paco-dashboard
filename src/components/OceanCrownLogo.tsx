@@ -4,12 +4,16 @@ interface OceanCrownLogoProps {
   variant?: 'light' | 'dark' | 'white';
   className?: string;
   size?: 'sm' | 'md' | 'lg';
+  name?: string;
+  tagline?: string;
 }
 
 export const OceanCrownLogo: React.FC<OceanCrownLogoProps> = ({
   variant = 'white',
   className = '',
   size = 'md',
+  name = 'Ocean Crown',
+  tagline = 'Shipping Services L.L.C.',
 }) => {
   const isWhite = variant === 'white';
   const textColor = isWhite ? 'text-white' : 'text-slate-900';
@@ -90,12 +94,12 @@ export const OceanCrownLogo: React.FC<OceanCrownLogoProps> = ({
         <span
           className={`font-montserrat text-[14px] font-extrabold tracking-wide uppercase ${textColor}`}
         >
-          Ocean Crown
+          {name}
         </span>
         <span
           className={`font-poppins text-[9.5px] font-medium tracking-tight uppercase ${subtextColor}`}
         >
-          Shipping Services L.L.C.
+          {tagline}
         </span>
       </div>
     </div>

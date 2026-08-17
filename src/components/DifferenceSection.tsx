@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
-import { differenceCards } from '../data/content';
+import { useSiteContent } from '../content/SiteContentProvider';
 
 interface DifferenceSectionProps {
   onLearnMore?: (cardId: string) => void;
@@ -8,6 +8,9 @@ interface DifferenceSectionProps {
 }
 
 export const DifferenceSection: React.FC<DifferenceSectionProps> = ({ onLearnMore, onOpenQuote }) => {
+  const { difference } = useSiteContent();
+  const differenceCards = difference.cards;
+
   return (
     <section id="difference" className="py-16 sm:py-20 lg:py-24 bg-[#f4f6f9] text-slate-800">
       <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-10">
@@ -17,33 +20,33 @@ export const DifferenceSection: React.FC<DifferenceSectionProps> = ({ onLearnMor
             <div>
               {/* Grand Multi-line Title */}
               <h2 className="font-montserrat text-2xl sm:text-3xl lg:text-[34px] font-extrabold text-[#08182b] tracking-tight leading-[1.2] mb-5">
-                Freight Company<br />
-                With a Difference.<br />
-                <span className="text-[#0077e6]">Innovation.</span>
+                {difference.titleLine1}<br />
+                {difference.titleLine2}<br />
+                <span className="text-[#0077e6]">{difference.titleHighlight}</span>
               </h2>
 
               {/* Descriptive Body Paragraph */}
               <p className="text-xs sm:text-[13px] leading-relaxed text-slate-600 mb-6 font-normal">
-                Crown Group is one of the leader's groups in the global and logistics services as it continues to expand its horizons, by providing innovative solutions, supported by bold, resolute and decisive action. We are aiming with confidence, to be the best global shipping &amp; logistics Provider.
+                {difference.description}
               </p>
 
               {/* Founder Signature Info */}
               <div className="pt-2 mb-6">
                 <div className="font-montserrat text-xs sm:text-sm font-extrabold text-slate-900 uppercase tracking-wider">
-                  ANWAR TAHER
+                  {difference.founderName}
                 </div>
                 <div className="text-[11px] text-slate-400 font-medium">
-                  Founder &amp; Director
+                  {difference.founderRole}
                 </div>
               </div>
 
               {/* Action Button: ABOUT US */}
               <div>
                 <a
-                  href="#corporate"
+                  href={difference.ctaHref}
                   className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#0077e6] hover:bg-[#0066c7] text-white font-montserrat font-bold text-xs uppercase tracking-wider rounded-full shadow-md hover:shadow-lg transition-all duration-200"
                 >
-                  ABOUT US
+                  {difference.ctaLabel}
                   <ArrowRight className="w-3.5 h-3.5" />
                 </a>
               </div>

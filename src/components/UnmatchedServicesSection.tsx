@@ -1,7 +1,7 @@
 import React from 'react';
 import { Truck, Ship, Plane, Package, Anchor, ArrowRight } from 'lucide-react';
-import { unmatchedServices } from '../data/content';
-import { ServiceCard } from '../types';
+import { useSiteContent } from '../content/SiteContentProvider';
+import type { ServiceItem } from '../content/schema';
 
 interface UnmatchedServicesSectionProps {
   onSelectService: (serviceName: string) => void;
@@ -10,7 +10,10 @@ interface UnmatchedServicesSectionProps {
 export const UnmatchedServicesSection: React.FC<UnmatchedServicesSectionProps> = ({
   onSelectService,
 }) => {
-  const renderIcon = (iconName: ServiceCard['iconName']) => {
+  const { unmatched } = useSiteContent();
+  const unmatchedServices = unmatched.services;
+
+  const renderIcon = (iconName: ServiceItem['iconName']) => {
     const props = { className: 'w-7 h-7 text-white stroke-[1.5]' };
     switch (iconName) {
       case 'truck':
@@ -48,10 +51,7 @@ export const UnmatchedServicesSection: React.FC<UnmatchedServicesSectionProps> =
           <div className="lg:col-span-4 flex flex-col justify-between space-y-6">
             <div>
               <h2 className="font-montserrat text-3xl sm:text-4xl lg:text-[38px] font-extrabold text-white tracking-tight leading-[1.15] mb-6">
-                Unmatched<br />
-                Services.<br />
-                Unmatched<br />
-                Excellence.
+                <span className="whitespace-pre-line">{unmatched.title}</span>
               </h2>
 
               {/* Circular White Arrow Button */}
@@ -68,7 +68,7 @@ export const UnmatchedServicesSection: React.FC<UnmatchedServicesSectionProps> =
 
             {/* Subtle trust note */}
             <div className="text-xs text-white/50 font-poppins hidden lg:block">
-              Dedicated worldwide freight specialists with 24/7 proactive control tower monitoring.
+              {unmatched.note}
             </div>
           </div>
 

@@ -1,7 +1,10 @@
 import React from 'react';
-import { MapPin, Globe2, Award } from 'lucide-react';
+import { MapPin, Globe2 } from 'lucide-react';
+import { useSiteContent } from '../content/SiteContentProvider';
 
 export const AboutSection: React.FC = () => {
+  const { about } = useSiteContent();
+
   return (
     <section id="corporate" className="py-12 sm:py-16 lg:py-20 bg-white text-slate-700">
       <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-10">
@@ -15,8 +18,8 @@ export const AboutSection: React.FC = () => {
               {/* Foreground Image: Professional logistics meeting / team around whiteboard */}
               <div className="relative z-10 rounded-xl overflow-hidden shadow-2xl border border-slate-100 aspect-4/3 sm:aspect-16/11 bg-slate-100">
                 <img
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80"
-                  alt="Ocean Crown Global Freight Forwarding Professionals"
+                  src={about.image}
+                  alt={about.imageAlt}
                   className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
                 />
               </div>
@@ -27,8 +30,8 @@ export const AboutSection: React.FC = () => {
                   <Globe2 className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-xs font-bold font-montserrat text-slate-900">4 Global Hubs</div>
-                  <div className="text-[11px] text-slate-500">Dubai • Jordan • Iraq • Antwerp</div>
+                  <div className="text-xs font-bold font-montserrat text-slate-900">{about.badgeTitle}</div>
+                  <div className="text-[11px] text-slate-500">{about.badgeSubtitle}</div>
                 </div>
               </div>
             </div>
@@ -38,22 +41,17 @@ export const AboutSection: React.FC = () => {
           <div className="lg:col-span-6 flex flex-col justify-center space-y-5 sm:space-y-6">
             <div className="space-y-4">
               <p className="text-xs sm:text-[13.5px] leading-relaxed text-slate-600 font-normal">
-                <strong className="text-slate-900 font-semibold">Ocean Crown Shipping Services LLC</strong> is positioned in Dubai, the United Arab Emirates which is Specialized in International Freight Forwarding business backed by professionals who have decades of global experience in the shipping industry. Experience in international freight forwarding by sea, air, and land.
+                {about.paragraph1}
               </p>
 
               <p className="text-xs sm:text-[13.5px] leading-relaxed text-slate-600 font-normal">
-                Where the headquarter Crown Logistics is located in <span className="text-[#0077e6] font-medium">(Amman & Aqaba)</span>, Jordan. And the other branches located respectively in <span className="text-[#0077e6] font-medium">(Basra)</span>, Iraq, <span className="text-[#0077e6] font-medium">(Antwerp)</span>, Belgium.
+                {about.paragraph2}
               </p>
             </div>
 
             {/* Quick Hub Badges */}
             <div className="pt-2 grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-              {[
-                { city: 'Dubai', country: 'U.A.E.', role: 'Regional HQ' },
-                { city: 'Amman & Aqaba', country: 'Jordan', role: 'Global HQ' },
-                { city: 'Basra', country: 'Iraq', role: 'Corridor Hub' },
-                { city: 'Antwerp', country: 'Belgium', role: 'European Gateway' },
-              ].map((loc, idx) => (
+              {about.hubs.map((loc, idx) => (
                 <div
                   key={idx}
                   className="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-sky-200 transition-colors"
