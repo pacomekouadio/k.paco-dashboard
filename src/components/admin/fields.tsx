@@ -107,7 +107,8 @@ export function ListEditor<T>({
   const move = (from: number, to: number) => {
     if (to < 0 || to >= items.length) return;
     const next = [...items];
-    const [it] = next.splice(from, 1);
+    const it = next[from]!;
+    next.splice(from, 1);
     next.splice(to, 0, it);
     onChange(next);
   };
